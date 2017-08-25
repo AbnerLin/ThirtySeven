@@ -4,8 +4,8 @@
         "HOST": "localhost",
         "PORT": "5432",
         "DATABASE": "thirtyseven",
-        "USERNAME": "test",
-        "PASSWORD": "test"
+        "USERNAME": "admin36",
+        "PASSWORD": "admin36@DB"
     },
     "COMMON":
     {
