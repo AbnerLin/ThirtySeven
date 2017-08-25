@@ -8,13 +8,16 @@ var _export = function(sequelize, DataTypes) {
     }, {
         /** Disable column updateAt, createAt */
         timestamps: false,
-        tableName: 'customer',
-        classMethods: {
-            associate: function(model) {
-                //TODO
-            }
-        }
+        tableName: 'furnishclass',
     });
+
+    FurnishClass.associate = function(model) {
+        // Customer.belongsTo(model.furnish, {
+        //     as: 'Furnish',
+        //     targetKey: 'furnishid'
+        // });
+        console.log("!!!!!");
+    };
 
     return FurnishClass;
 };

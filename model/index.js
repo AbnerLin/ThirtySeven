@@ -37,8 +37,9 @@ fs.readdirSync(path.join(__dirname))
     });
 
 Object.keys(db).forEach(function(moduleName) {
-    if ('associate' in db[moduleName])
+    if ('associate' in db[moduleName]) {
         db[moduleName].associate(db);
+    }
 });
 
 db.sequelize = sequelize;

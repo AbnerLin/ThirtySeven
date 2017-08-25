@@ -37,6 +37,7 @@ var _export = function(sequelize, DataTypes) {
         remark: DataTypes.STRING,
 
         /** ==Foreign key== */
+
         /** Table number */
         furnish: {
             type: DataTypes.STRING,
@@ -44,7 +45,7 @@ var _export = function(sequelize, DataTypes) {
                 isUUID: 4
             },
             references: {
-                model: sequelize.models.furnish,
+                model: 'furnish',
                 key: 'furnishid',
             }
         }
@@ -53,12 +54,16 @@ var _export = function(sequelize, DataTypes) {
         /** Disable column updateAt, createAt */
         timestamps: false,
         tableName: 'customer',
-        classMethods: {
-            associate: function(model) {
-                //TODO
-            }
-        }
     });
+
+    Customer.associate = function(model) {
+        Customer.belongsTo(model.furnish, {
+            as: 'furnishObj',
+            foreignKey: 'furnish',
+            /** Target model column */
+            targetKey: 'furnishid'
+        });
+    };
 
     return Customer;
 };

@@ -5,7 +5,6 @@
 var _export = function(sequelize, DataTypes) {
 
     const Furnish = sequelize.define('furnish', {
-
         /** Furnish ID */
         furnishid: {
             primaryKey: true,
@@ -24,9 +23,10 @@ var _export = function(sequelize, DataTypes) {
         /** X coordinate */
         x: DataTypes.INTEGER,
         /** Y coordinate */
-        y: DataTypes.INTEGER,
+        y: DataTypes.INTEGER
 
         /** ==Foreign key== */
+
         /** Furnish Class */
         // furnishclass: {
         //     type: DataTypes.STRING,
@@ -35,7 +35,7 @@ var _export = function(sequelize, DataTypes) {
         //         isUUID: 4
         //     },
         //     references: {
-        //         model: sequelize.models.funishclass,
+        //         model: 'furnishclass',
         //         key: 'furnishclassid'
         //     }
         // },
@@ -48,7 +48,7 @@ var _export = function(sequelize, DataTypes) {
         //         isUUID: 4
         //     },
         //     references: {
-        //         model: sequelize.models.map,
+        //         model: 'map',
         //         key: 'mapid'
         //     }
         // }
@@ -57,12 +57,16 @@ var _export = function(sequelize, DataTypes) {
         /** Disable column updateAt, createAt */
         timestamps: false,
         tableName: 'furnish',
-        classMethods: {
-            associate: function(model) {
-                Furnish.hasMany(model.Customer, { foreignKey: 'furnish', sourceKey: 'furnishid' });
-            }
-        }
     });
+
+    Furnish.associate = function(model) {
+        Furnish.hasMany(model.customer, {
+            as: 'customerObj',
+            foreignKey: 'furnish',
+            /** Self model column */
+            sourceKey: 'furnishid'
+        });
+    };
 
     return Furnish;
 };
