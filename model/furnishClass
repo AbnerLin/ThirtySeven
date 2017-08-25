@@ -1,0 +1,22 @@
+/**
+ * FurnishClass entity class.
+ */
+
+var _export = function(sequelize, DataTypes) {
+    const FurnishClass = sequelize.define('furnishclass', {
+        aid: DataTypes.STRING
+    }, {
+        /** Disable column updateAt, createAt */
+        timestamps: false,
+        tableName: 'customer',
+        classMethods: {
+            associate: function(model) {
+                //TODO
+            }
+        }
+    });
+
+    return FurnishClass;
+};
+
+module.exports = _export;

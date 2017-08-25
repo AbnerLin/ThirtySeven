@@ -19,7 +19,7 @@ var _export = function(sequelize, DataTypes) {
             type: DataTypes.DATE,
             allowNull: false,
             defaultValue: DataTypes.NOW
-        }
+        },
         /** Customer check out time */
         checkouttime: DataTypes.DATE,
         /** Customer name */
@@ -32,9 +32,9 @@ var _export = function(sequelize, DataTypes) {
             validate: {
                 min: 0
             }
-        }
+        },
         /** Remark */
-        remark: DataTypes.STRING
+        remark: DataTypes.STRING,
 
         /** ==Foreign key== */
         /** Table number */
@@ -46,21 +46,19 @@ var _export = function(sequelize, DataTypes) {
             references: {
                 model: sequelize.models.furnish,
                 key: 'furnishid',
-                /** This declares when to check the foreign key constraint. PostgreSQL only. */
-                deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
             }
         }
 
     }, {
         /** Disable column updateAt, createAt */
         timestamps: false,
-        tableName: 'customer'
+        tableName: 'customer',
+        classMethods: {
+            associate: function(model) {
+                //TODO
+            }
+        }
     });
-
-    /** associate */
-    Customer.associate = function(model) {
-        //pass
-    };
 
     return Customer;
 };

@@ -28,45 +28,41 @@ var _export = function(sequelize, DataTypes) {
 
         /** ==Foreign key== */
         /** Furnish Class */
-        furnishclass: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                isUUID: 4
-            },
-            references: {
-                model: sequelize.models.funishclass,
-                key: 'furnishclassid',
-                /** This declares when to check the foreign key constraint. PostgreSQL only. */
-                deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-            }
-        },
+        // furnishclass: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     validate: {
+        //         isUUID: 4
+        //     },
+        //     references: {
+        //         model: sequelize.models.funishclass,
+        //         key: 'furnishclassid'
+        //     }
+        // },
 
         /** Map */
-        map: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                isUUID: 4
-            },
-            references: {
-                model: sequelize.models.map,
-                key: 'mapid',
-                /** This declares when to check the foreign key constraint. PostgreSQL only. */
-                deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-            }
-        }
+        // map: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     validate: {
+        //         isUUID: 4
+        //     },
+        //     references: {
+        //         model: sequelize.models.map,
+        //         key: 'mapid'
+        //     }
+        // }
 
     }, {
         /** Disable column updateAt, createAt */
         timestamps: false,
-        tableName: 'customer'
+        tableName: 'furnish',
+        classMethods: {
+            associate: function(model) {
+                Furnish.hasMany(model.Customer, { foreignKey: 'furnish', sourceKey: 'furnishid' });
+            }
+        }
     });
-
-    /** associate */
-    Furnish.associate = function(model) {
-        Furnish.hasMany(model.Customer);
-    };
 
     return Furnish;
 };
