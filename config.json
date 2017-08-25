@@ -1,0 +1,14 @@
+{
+    "DB":
+    {
+        "HOST": "localhost",
+        "PORT": "5432",
+        "DATABASE": "thirtyseven",
+        "USERNAME": "test",
+        "PASSWORD": "test"
+    },
+    "COMMON":
+    {
+        "TEST": "TEST"
+    }
+}
