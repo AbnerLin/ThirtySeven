@@ -8,25 +8,30 @@ const path = require('path');
 var model = require(path.join(__dirname, '..', 'model'));
 
 router.get('/', function(req, res) {
+
         model.furnish.findAll({
             include: [{
+                model: model.seatmap,
+                as: 'seatmap'
+            }, {
                 model: model.customer,
-                as: 'customerObj'
+                as: 'customerList'
             }]
         }).then(function(data) {
-            console.log(data[0].dataValues);
-            console.log('================');
+            console.log(data);
+            // console.log(data[0].dataValues);
+            // console.log('================');
         });
 
-        model.customer.findAll({
-            include: [{
-                model: model.furnish,
-                as: 'furnishObj'
-            }]
-        }).then(function(data) {
-             console.log(data[0].dataValues);
-             console.log('================');
-        });
+        // model.customer.findAll({
+        //     include: [{
+        //         model: model.furnish,
+        //         as: 'furnishObj'
+        //     }]
+        // }).then(function(data) {
+        //      console.log(data[0].dataValues);
+        //      console.log('================');
+        // });
 
 
 

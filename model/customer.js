@@ -33,6 +33,8 @@ var _export = function(sequelize, DataTypes) {
                 min: 0
             }
         },
+        /** Phone Number */
+        phone: DataTypes.STRING,
         /** Remark */
         remark: DataTypes.STRING,
 
@@ -41,6 +43,7 @@ var _export = function(sequelize, DataTypes) {
         /** Table number */
         furnish: {
             type: DataTypes.STRING,
+            allowNull: false,
             validate: {
                 isUUID: 4
             },
@@ -62,6 +65,12 @@ var _export = function(sequelize, DataTypes) {
             foreignKey: 'furnish',
             /** Target model column */
             targetKey: 'furnishid'
+        });
+
+        Customer.hasMany(model.booking, {
+            as: 'bookingList',
+            foreignKey: 'customerid',
+            sourceKey: 'customerid'
         });
     };
 

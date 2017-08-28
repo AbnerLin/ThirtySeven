@@ -21,37 +21,42 @@ var _export = function(sequelize, DataTypes) {
             unique: true
         },
         /** X coordinate */
-        x: DataTypes.INTEGER,
+        x: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         /** Y coordinate */
-        y: DataTypes.INTEGER
-
+        y: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         /** ==Foreign key== */
 
         /** Furnish Class */
-        // furnishclass: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         isUUID: 4
-        //     },
-        //     references: {
-        //         model: 'furnishclass',
-        //         key: 'furnishclassid'
-        //     }
-        // },
+        furnishclass: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isUUID: 4
+            },
+            references: {
+                model: 'furnishclass',
+                key: 'classid'
+            }
+        },
 
         /** Map */
-        // map: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         isUUID: 4
-        //     },
-        //     references: {
-        //         model: 'map',
-        //         key: 'mapid'
-        //     }
-        // }
+        mapid: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isUUID: 4
+            },
+            references: {
+                model: 'seatmap',
+                key: 'mapid'
+            }
+        }
 
     }, {
         /** Disable column updateAt, createAt */
@@ -60,11 +65,19 @@ var _export = function(sequelize, DataTypes) {
     });
 
     Furnish.associate = function(model) {
+        /** customer */
         Furnish.hasMany(model.customer, {
-            as: 'customerObj',
+            as: 'customerList',
             foreignKey: 'furnish',
             /** Self model column */
             sourceKey: 'furnishid'
+        });
+
+        /** map */
+        Furnish.belongsTo(model.seatmap, {
+            as: 'seatmap',
+            foreignKey: 'mapid',
+            targetKey: 'mapid'
         });
     };
 
