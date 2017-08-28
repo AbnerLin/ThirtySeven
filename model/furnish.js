@@ -79,6 +79,13 @@ var _export = function(sequelize, DataTypes) {
             foreignKey: 'mapid',
             targetKey: 'mapid'
         });
+
+        /** FurnishClass */
+        Furnish.belongsTo(model.furnishclass, {
+            as: 'furnishClassObj',
+            foreignKey: 'furnishclass',
+            targetKey: 'classid'
+        });
     };
 
     return Furnish;
