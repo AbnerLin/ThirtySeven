@@ -4,9 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require(path.join(process.cwd(), 'lib', 'logger'));
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var app = express();
-
-// var expressRouteLoader = require(global.lib + 'expressRouteLoader')(app);
 
 var expressRouteLoader = require(path.join(process.cwd(), 'lib', 'expressRouteLoader'))(app);
 
@@ -16,6 +15,16 @@ app.set('view engine', 'pug');
 
 /** uncomment after placing your favicon in /public */
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+/** Session */
+app.use(session({
+    cookie: {
+        path: '/',
+        httpOnly: false,
+        maxAge: 24 * 60 * 60 * 1000
+    },
+    secret: '1234567890QWERT'
+}))
 
 /** Logger setting. */
 app.use(function(req, res, next) {

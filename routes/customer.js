@@ -5,6 +5,8 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const customerService = require(path.join(process.cwd(), 'lib', 'customerService'));
+const hasRole = require(path.join(process.cwd(), 'lib', 'authService'));
+
 
 var model = require(path.join(__dirname, '..', 'model'));
 
@@ -38,11 +40,7 @@ router.get('/', function(req, res) {
 
         res.send('Get All Customer.');
     })
-    .get('/dining', function(req, res) {
-
-        console.log(req.session);
-        req.session.user = 'Test';
-
+    .get('/dining', hasRole('STAFF'), function(req, res) {
         res.send('Get dining Customer.');
     })
     .post('/', function(req, res) {
