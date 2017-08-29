@@ -3,8 +3,9 @@
  */
 const express = require('express');
 const router = express.Router();
-const customerService = require(global.lib + 'customerService')
 const path = require('path');
+const customerService = require(path.join(process.cwd(), 'lib', 'customerService'));
+
 var model = require(path.join(__dirname, '..', 'model'));
 
 router.get('/', function(req, res) {

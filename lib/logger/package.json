@@ -1,0 +1,11 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "Package the logger setting and be the module that can invoke from all other .js file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "AbnerLin",
+  "license": "GPL-3.0"
+}

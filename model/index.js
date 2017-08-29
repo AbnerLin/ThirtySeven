@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+var logger = require(path.join(process.cwd(), 'lib', 'logger'));
 
 var config = require(path.join(__dirname, '..', 'config.json'));
 
@@ -8,6 +9,9 @@ var config = require(path.join(__dirname, '..', 'config.json'));
 const sequelize = new Sequelize(config.DB.DATABASE, config.DB.USERNAME, config.DB.PASSWORD, {
     host: config.DB.HOST,
     dialect: 'postgres',
+    logging: function(msg) {
+        logger.info(msg);
+    },
     pool: {
         max: 3,
         min: 0,
@@ -17,10 +21,9 @@ const sequelize = new Sequelize(config.DB.DATABASE, config.DB.USERNAME, config.D
 
 /** Test connection */
 sequelize.authenticate().then(function() {
-    console.log('Connection has been established successfully.');
+    logger.info('Connection has been established successfully.');
 }).catch(function(err) {
-    console.error('Unable to connect to the database:', err);
-    process.exit(1);
+    logger.error('Unable to connect to the database:' + err);
 });
 
 var db = {};
