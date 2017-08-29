@@ -15,7 +15,8 @@
     "pg-hstore": "^2.3.2",
     "pug": "~2.0.0-beta11",
     "sequelize": "^4.7.5",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "winston": "^2.3.1"
   },
   "description": "The ThritySeven is the back-end application same with my repository \"ThirtySix\", but this version is use Node.js for develop language.",
   "main": "app.js",
