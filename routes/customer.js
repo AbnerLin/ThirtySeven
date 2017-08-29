@@ -39,6 +39,10 @@ router.get('/', function(req, res) {
         res.send('Get All Customer.');
     })
     .get('/dining', function(req, res) {
+
+        console.log(req.session);
+        req.session.user = 'Test';
+
         res.send('Get dining Customer.');
     })
     .post('/', function(req, res) {

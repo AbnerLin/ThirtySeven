@@ -17,7 +17,7 @@ app.set('view engine', 'pug');
 /** uncomment after placing your favicon in /public */
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-/** Logger setting. */ 
+/** Logger setting. */
 app.use(function(req, res, next) {
     logger.info(logger.httpPattern(req, res));
     next();
