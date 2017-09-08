@@ -28,7 +28,7 @@ app.use(session({
 
 /** Logger setting. */
 app.use(function(req, res, next) {
-    logger.info(logger.httpPattern(req, res));
+    logger.info(logger.requestPattern(req));
     next();
 });
 
@@ -55,6 +55,10 @@ app.use(function(err, req, res, next) {
 
     /** render the error page */
     res.status(err.status || 500);
+
+    /** logger */
+    logger.info(logger.responsePattern(res));
+
     res.render('error');
 });
 

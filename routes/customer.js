@@ -5,9 +5,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const customerService = require(path.join(process.cwd(), 'lib', 'customerService'));
-const hasRole = require(path.join(process.cwd(), 'lib', 'authService'));
-
-
+const hasRole = require(path.join(process.cwd(), 'lib', 'authService')).hasRole;
 var model = require(path.join(__dirname, '..', 'model'));
 
 router.get('/', function(req, res) {
@@ -25,17 +23,6 @@ router.get('/', function(req, res) {
             // console.log(data[0].dataValues);
             // console.log('================');
         });
-
-        // model.customer.findAll({
-        //     include: [{
-        //         model: model.furnish,
-        //         as: 'furnishObj'
-        //     }]
-        // }).then(function(data) {
-        //      console.log(data[0].dataValues);
-        //      console.log('================');
-        // });
-
 
 
         res.send('Get All Customer.');
