@@ -1,5 +1,5 @@
 /**
- *   UserInfo entity class.
+ *   UserInfo model.
  */
 
 var _export = function(sequelize, DataTypes) {

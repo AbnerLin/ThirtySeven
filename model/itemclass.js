@@ -1,5 +1,5 @@
 /**
- * ItemClass entity class.
+ * ItemClass model.
  */
 
 var _export = function(sequelize, DataTypes) {

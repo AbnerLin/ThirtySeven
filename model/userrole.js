@@ -1,5 +1,5 @@
 /**
- *   UserRole entity class.
+ *   UserRole model.
  */
 
 var _export = function(sequelize, DataTypes) {

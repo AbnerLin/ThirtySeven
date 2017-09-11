@@ -1,5 +1,5 @@
 /**
- * SeatMap entity class.
+ * SeatMap model.
  */
 
 var _export = function(sequelize, DataTypes) {

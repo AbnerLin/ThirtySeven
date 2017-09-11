@@ -1,5 +1,5 @@
 /**
- * Booking entity class.
+ * Booking model.
  */
 
 var _export = function(sequelize, DataTypes) {

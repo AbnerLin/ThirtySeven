@@ -1,0 +1,11 @@
+{
+  "name": "repository",
+  "version": "1.0.0",
+  "description": "The DAO based on Sequelize.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "AbnerLin",
+  "license": "GPL-3.0"
+}

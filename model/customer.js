@@ -1,5 +1,5 @@
 /**
- * Customer entity class.
+ * Customer model.
  */
 
 var _export = function(sequelize, DataTypes) {

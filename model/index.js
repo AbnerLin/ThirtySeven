@@ -1,9 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-var logger = require(path.join(__dirname, '..', 'lib', 'logger'));
-
-var config = require(path.join(__dirname, '..', 'config.json'));
+const logger = require(path.join(__dirname, '..', 'lib', 'logger'));
+const config = require(path.join(__dirname, '..', 'config.json'));
 
 /** Establish connection. */
 const sequelize = new Sequelize(config.DB.DATABASE, config.DB.USERNAME, config.DB.PASSWORD, {

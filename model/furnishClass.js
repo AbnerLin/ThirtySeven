@@ -1,5 +1,5 @@
 /**
- * FurnishClass entity class.
+ * FurnishClass model.
  */
 
 var _export = function(sequelize, DataTypes) {
