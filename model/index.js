@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-var logger = require(path.join(process.cwd(), 'lib', 'logger'));
+var logger = require(path.join(__dirname, '..', 'lib', 'logger'));
 
 var config = require(path.join(__dirname, '..', 'config.json'));
 

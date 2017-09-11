@@ -23,7 +23,8 @@ var server = http.createServer(app);
 
 
 /** Database */
-var models = require('../model');
+const path = require('path');
+var models = require(path.join(__dirname, '..', 'model'));
 models.sequelize.sync({
     force: false,
     alter: false

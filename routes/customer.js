@@ -6,7 +6,7 @@ const router = express.Router();
 const path = require('path');
 const customerService = require(path.join(process.cwd(), 'lib', 'customerService'));
 const hasRole = require(path.join(process.cwd(), 'lib', 'authService')).hasRole;
-var model = require(path.join(__dirname, '..', 'model'));
+var model = require(path.join(process.cwd(), 'model'));
 
 router.get('/', function(req, res) {
 
@@ -23,7 +23,6 @@ router.get('/', function(req, res) {
             // console.log(data[0].dataValues);
             // console.log('================');
         });
-
 
         res.send('Get All Customer.');
     })

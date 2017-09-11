@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res) {
+        auth.login(1, 2);
         res.send('Get All Map with FurnishClass and Furnish.');
     })
     .get('/:mapId/furnish', function(req, res) {
