@@ -26,16 +26,17 @@ app.use(session({
     secret: '1234567890QWERT'
 }))
 
-/** Logger setting. */
-app.use(function(req, res, next) {
-    logger.info(logger.requestPattern(req));
-    next();
-});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+/** Logger setting. */
+app.use(function(req, res, next) {
+    logger.info(logger.requestPattern(req));
+    next();
+});
 
 /** Load route */
 expressRouteLoader.dir(path.join(__dirname, 'routes'));
