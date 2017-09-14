@@ -17,10 +17,11 @@ models.sequelize.sync({
     alter: false
 }).then(function() {
 
-    let authService = require(path.join(__dirname, '..', 'lib', 'authService'));
+    let authService = require(path.join(__dirname, '..', 'lib', 'authService')).init();
+    let menuService = require(path.join(__dirname, '..', 'lib', 'menuService')).init();
 
     /** Initialize data before start http server. */
-    Promise.all(authService.init()).then(() => {
+    Promise.all([].concat(authService, menuService)).then(() => {
 
         var app = require(path.join(__dirname, '..', 'app'));
 
