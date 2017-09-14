@@ -41,7 +41,7 @@ var _export = function(sequelize, DataTypes) {
             }
         },
         /** ==Foreign key== */
-        itemclass: {
+        classid: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -49,7 +49,7 @@ var _export = function(sequelize, DataTypes) {
             },
             references: {
                 model: 'itemclass',
-                key: 'itemclassid'
+                key: 'classid'
             }
         }
 
@@ -62,8 +62,8 @@ var _export = function(sequelize, DataTypes) {
     Item.associate = function(model) {
         Item.belongsTo(model.itemclass, {
             as: 'itemclassObj',
-            foreignKey: 'itemclass',
-            targetKey: 'itemclassid'
+            foreignKey: 'classid',
+            targetKey: 'classid'
         });
 
         Item.hasMany(model.booking, {

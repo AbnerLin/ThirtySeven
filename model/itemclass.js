@@ -7,7 +7,7 @@ var _export = function(sequelize, DataTypes) {
     const ItemClass = sequelize.define('itemclass', {
 
         /** ItemClass id */
-        itemclassid: {
+        classid: {
             primaryKey: true,
             type: DataTypes.STRING,
             defaultValue: DataTypes.UUIDV4,
@@ -45,8 +45,8 @@ var _export = function(sequelize, DataTypes) {
     ItemClass.associate = function(model) {
         ItemClass.hasMany(model.item, {
             as: 'item',
-            foreignKey: 'itemclassid',
-            sourceKey: 'itemclassid'
+            foreignKey: 'classid',
+            sourceKey: 'classid'
         });
     };
 
