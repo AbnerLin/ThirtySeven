@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var app = express();
 
-var expressRouteLoader = require(path.join(process.cwd(), 'lib', 'expressRouteLoader'))(app);
+var expressRouteLoader = require(path.join(process.cwd(), 'lib', 'express-route-loader'))(app);
 
 /** view engine setup */
 app.set('views', path.join(__dirname, 'views'));

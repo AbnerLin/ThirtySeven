@@ -17,7 +17,7 @@ var _export = function(sequelize, DataTypes) {
         /** Furnish name */
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             unique: true
         },
         /** X coordinate */

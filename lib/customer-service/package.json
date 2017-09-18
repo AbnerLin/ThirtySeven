@@ -1,7 +1,7 @@
 {
-  "name": "menuservice",
+  "name": "customer-service",
   "version": "1.0.0",
-  "description": "Menu module which as proxy about access database and keep buffer.",
+  "description": "Customer Servcie for access database and buffer.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

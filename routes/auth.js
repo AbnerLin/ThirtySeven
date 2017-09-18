@@ -1,6 +1,6 @@
 const path = require('path');
 const passwordHash = require('password-hash');
-const authService = require(path.join(__dirname, '..', 'lib', 'authService'));
+const authService = require(path.join(__dirname, '..', 'lib', 'auth-service'));
 
 /**
  * Auth controller.

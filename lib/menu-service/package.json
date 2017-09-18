@@ -1,7 +1,7 @@
 {
-  "name": "authservice",
+  "name": "menu-service",
   "version": "1.0.0",
-  "description": "Auth module which manager about user authentication.",
+  "description": "Menu module which as proxy about access database and keep buffer.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

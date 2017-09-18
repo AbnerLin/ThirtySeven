@@ -1,5 +1,5 @@
 {
-  "name": "expressrouteloader",
+  "name": "express-route-loader",
   "version": "1.0.0",
   "description": "Load express route by given .js path, and the route file must export the property \"root\" which is the url path. Also provide the feature for load route in dir which provided as the first argument.",
   "main": "index.js",

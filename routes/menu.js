@@ -1,5 +1,5 @@
 const path = require('path');
-const menuService = require(path.join(__dirname, '..', 'lib', 'menuService'));
+const menuService = require(path.join(__dirname, '..', 'lib', 'menu-service'));
 
 /**
  * Menu controller.
