@@ -8,7 +8,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', function(req, res) {
-    res.send(menuService.getMenu());
+    res.send(menuService.menu);
 });
 
 router.root = '/menu';

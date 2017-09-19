@@ -10,7 +10,7 @@ const model = require(path.join(__dirname, '..', 'model'));
 
 router.get('/', hasRole('STAFF'), function(req, res) {
         /** Get dining customer. */
-        res.send(customerService.getDiningCustomer());
+        res.send(customerService.diningCustomer);
     })
     .post('/', hasRole('STAFF'), function(req, res) {
         /** Customer check in. */
