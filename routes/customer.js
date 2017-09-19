@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const customerService = require(path.join(__dirname, '..', 'lib', 'customer-service'));
-const hasRole = require(path.join(__dirname, '..', 'lib', 'auth-service')).hasRole;
+const hasRole = require(path.join(__dirname, '..', 'lib', 'auth-service')).http().hasRole;
 const model = require(path.join(__dirname, '..', 'model'));
 
 router.get('/', hasRole('STAFF'), function(req, res) {

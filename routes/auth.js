@@ -1,6 +1,6 @@
 const path = require('path');
 const passwordHash = require('password-hash');
-const authService = require(path.join(__dirname, '..', 'lib', 'auth-service'));
+const authService = require(path.join(__dirname, '..', 'lib', 'auth-service')).http();
 
 /**
  * Auth controller.
@@ -12,10 +12,11 @@ router.post('/login', function(req, res) {
         let username = req.body.username;
         let password = req.body.password;
         let userInfo = authService.login(username, password);
-        if (userInfo) {
-            req.session.userInfo = userInfo;
+        if (userInfo._status) {
+            req.session.userInfo = userInfo._data;
+            //TODO redirect to index page.
         } else {
-            // TODO
+            // TODO redirect to login page.
         }
     })
     .get('/logout', authService.logout(), function(req, res) {
