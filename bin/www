@@ -20,9 +20,10 @@ models.sequelize.sync({
     let authService = require(path.join(__dirname, '..', 'lib', 'auth-service')).init();
     let menuService = require(path.join(__dirname, '..', 'lib', 'menu-service')).init();
     let customerService = require(path.join(__dirname, '..', 'lib', 'customer-service')).init();
+    let mapService = require(path.join(__dirname, '..', 'lib', 'map-service')).init();
 
     /** Initialize data before start http server. */
-    Promise.all([].concat(authService, menuService)).then(() => {
+    Promise.all([].concat(authService, menuService, customerService, mapService)).then(() => {
 
         var app = require(path.join(__dirname, '..', 'app'));
 
