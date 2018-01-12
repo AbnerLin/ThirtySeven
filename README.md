@@ -5,4 +5,4 @@ The ThritySeven is the application same with [ThirtySix](https://github.com/Abne
     We will use the Node.js(v8.x.x) for RESTful API.
 
 ## Front-end
-    We will use the AngularJS2 to develop front-end.
+    We will use the Angular to develop front-end.
