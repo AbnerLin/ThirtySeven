@@ -8,21 +8,22 @@ const authService = require(path.join(__dirname, '..', 'lib', 'auth-service')).h
 const express = require('express');
 const router = express.Router();
 
-router.post('/login', function(req, res) {
-        let username = req.body.username;
-        let password = req.body.password;
-        let userInfo = authService.login(username, password);
-        if (userInfo._status) {
-            req.session.userInfo = userInfo._data;
-            //TODO redirect to index page.
-        } else {
-            // TODO redirect to login page.
-        }
-    })
-    .get('/logout', authService.logout(), function(req, res) {
-        //TODO redirect to login page.
-        res.end();
-    });
+router.post('/login', (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    let userInfo = authService.login(username, password); // TODO need modify auth service.
+    if (userInfo._status) {
+        req.session.userInfo = userInfo._data;
+        //TODO Respond dto
+    } else {
+        //TODO Respond dto
+    }
+});
+
+router.get('/logout', authService.logout(), function(req, res) {
+    //TODO Respond dto
+    res.end();
+});
 
 router.root = '/auth';
 
