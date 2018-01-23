@@ -11,6 +11,4 @@ router.get('/', function(req, res) {
     res.send(menuService.menu);
 });
 
-router.root = '/menu';
-
 module.exports = router;

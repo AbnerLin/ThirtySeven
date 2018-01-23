@@ -1,6 +1,6 @@
 const path = require('path');
 const passwordHash = require('password-hash');
-const authService = require(path.join(__dirname, '..', 'lib', 'auth-service')).http();
+const authService = require(path.join(__dirname, '..', 'lib', 'service', 'auth')).http();
 
 /**
  * Auth controller.
@@ -24,7 +24,5 @@ router.get('/logout', authService.logout(), function(req, res) {
     //TODO Respond dto
     res.end();
 });
-
-router.root = '/auth';
 
 module.exports = router;

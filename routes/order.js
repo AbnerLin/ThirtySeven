@@ -11,6 +11,4 @@ router.post('/', function(req, res) {
         res.send('Delivery Meal.');
     });
 
-router.root = '/order';
-
 module.exports = router;

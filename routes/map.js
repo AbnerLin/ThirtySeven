@@ -22,6 +22,4 @@ router.get('/', function(req, res) {
         res.send('Insert new Map with Furnishs.');
     });
 
-router.root = '/map';
-
 module.exports = router;

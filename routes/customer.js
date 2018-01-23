@@ -34,6 +34,4 @@ router.get('/', hasRole('STAFF'), function(req, res) {
         res.send('Update Customer. (CheckOut)');
     });
 
-router.root = '/customer';
-
 module.exports = router;
