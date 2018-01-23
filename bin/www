@@ -17,34 +17,25 @@ models.sequelize.sync({
     alter: false
 }).then(function() {
 
-    let authService = require(path.join(__dirname, '..', 'lib', 'auth-service')).http().init();
-    let menuService = require(path.join(__dirname, '..', 'lib', 'menu-service')).init();
-    let customerService = require(path.join(__dirname, '..', 'lib', 'customer-service')).init();
-    let mapService = require(path.join(__dirname, '..', 'lib', 'map-service')).init();
-
-    /** Initialize data before start http server. */
-    Promise.all([].concat(authService, menuService, customerService, mapService)).then(() => {
-
         var app = require(path.join(__dirname, '..', 'app'));
 
-        /**
-         * Get port from environment and store in Express.
-         */
-        var port = normalizePort(process.env.PORT || '3000');
-        app.set('port', port);
+    /**
+     * Get port from environment and store in Express.
+     */
+    var port = normalizePort(process.env.PORT || '3000');
+    app.set('port', port);
 
-        /**
-         * Create HTTP server.
-         */
-        server = http.createServer(app);
+    /**
+     * Create HTTP server.
+     */
+    server = http.createServer(app);
 
-        /**
-         * Listen on provided port, on all network interfaces.
-         */
-        server.listen(port);
-        server.on('error', onError);
-        server.on('listening', onListening);
-    });
+    /**
+     * Listen on provided port, on all network interfaces.
+     */
+    server.listen(port);
+    server.on('error', onError);
+    server.on('listening', onListening);
 });
 
 /**
