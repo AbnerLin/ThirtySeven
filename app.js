@@ -3,15 +3,16 @@ const path = require('path');
 const logger = require(path.join(process.cwd(), 'lib', 'logger'));
 const session = require('express-session');
 
-// const auth = require(path.join(process.cwd(), 'routes', 'auth'));
+/** app path */
+global.appRoot = path.resolve(__dirname);
+
+const auth = require(path.join(process.cwd(), 'routes', 'auth'));
 //const customer = require(path.join(process.cwd(), 'routes', 'customer'));
 //const map = require(path.join(process.cwd(), 'routes', 'map'));
 //const menu = require(path.join(process.cwd(), 'routes', 'menu'));
 //const order = require(path.join(process.cwd(), 'routes', 'order'));
 
 const app = express();
-
-// var expressRouteLoader = require('@abnerlin/express-routes-loader')(app);
 
 /** Session */
 app.use(session({
@@ -32,8 +33,7 @@ app.use(function(req, res, next) {
 });
 
 /** Load route */
-// expressRouteLoader.dir(path.join(__dirname, 'routes'));
-// app.use('/api/auth', auth);
+app.use('/api/auth', auth);
 //app.use('/api/customer', customer);
 //app.use('/api/map', map);
 //app.use('/api/menu', menu);

@@ -1,6 +1,6 @@
 const path = require('path');
 const passwordHash = require('password-hash');
-// const authService = require(path.join(__dirname, '..', 'lib', 'service', 'auth')).http();
+const authService = require(path.join(appRoot, 'lib', 'service', 'auth')).http();
 
 /**
  * Auth controller.
