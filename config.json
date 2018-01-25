@@ -6,10 +6,5 @@
         "DATABASE": "thirtyseven",
         "USERNAME": "admin36",
         "PASSWORD": "admin36@DB"
-    },
-    "MODE": "DEV",
-    "COMMON":
-    {
-        "TEST": "TEST"
     }
 }

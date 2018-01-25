@@ -1,18 +1,19 @@
-const express = require('express');
 const path = require('path');
-const logger = require(path.join(process.cwd(), 'lib', 'logger'));
+global.appRoot = path.resolve(__dirname);
+const express = require('express');
+const logger = require(path.join(appRoot, 'lib', 'logger'));
+const bodyParser = require('body-parser');
 const session = require('express-session');
 
-/** app path */
-global.appRoot = path.resolve(__dirname);
-
-const auth = require(path.join(process.cwd(), 'routes', 'auth'));
+const auth = require(path.join(appRoot, 'routes', 'auth'));
 //const customer = require(path.join(process.cwd(), 'routes', 'customer'));
 //const map = require(path.join(process.cwd(), 'routes', 'map'));
 //const menu = require(path.join(process.cwd(), 'routes', 'menu'));
 //const order = require(path.join(process.cwd(), 'routes', 'order'));
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 /** Session */
 app.use(session({

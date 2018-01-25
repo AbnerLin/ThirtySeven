@@ -5,13 +5,14 @@ class ResponseDTO {
         this._data = null;
     }
 
-    statusOK() {
-        this._msg = 'Success!';
+    statusOK(msg = 'Success!') {
+        this._msg = msg;
         this._status = true;
     }
 
-    statusFail() {
+    statusFail(msg) {
         this._status = false;
+        this._msg = msg;
     }
 
     get status() {
