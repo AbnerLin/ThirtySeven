@@ -1,7 +1,6 @@
 /**
  * Customer model.
  */
-
 var _export = function(sequelize, DataTypes) {
     /** schema */
     const Customer = sequelize.define('customer', {

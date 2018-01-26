@@ -1,12 +1,14 @@
 const path = require('path');
 global.appRoot = path.resolve(__dirname);
+global.libPath = path.resolve(appRoot + '/lib');
+
 const express = require('express');
 const logger = require(path.join(appRoot, 'lib', 'logger'));
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
 const auth = require(path.join(appRoot, 'routes', 'auth'));
-//const customer = require(path.join(process.cwd(), 'routes', 'customer'));
+const customer = require(path.join(appRoot, 'routes', 'customer'));
 //const map = require(path.join(process.cwd(), 'routes', 'map'));
 //const menu = require(path.join(process.cwd(), 'routes', 'menu'));
 //const order = require(path.join(process.cwd(), 'routes', 'order'));
@@ -35,7 +37,7 @@ app.use(function(req, res, next) {
 
 /** Load route */
 app.use('/api/auth', auth);
-//app.use('/api/customer', customer);
+app.use('/api/customer', customer);
 //app.use('/api/map', map);
 //app.use('/api/menu', menu);
 //app.use('/api/order', order);
