@@ -1,11 +1,6 @@
 const path = require('path');
-const passwordHash = require('password-hash');
 const authService = require(path.join(appRoot, 'lib', 'service', 'auth')).http();
 const ResDTO = require(path.join(appRoot, 'object', 'response-dto'));
-
-/**
- * Auth controller.
- */
 const express = require('express');
 const router = express.Router();
 

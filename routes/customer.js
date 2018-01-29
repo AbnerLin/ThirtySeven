@@ -3,7 +3,6 @@ const router = express.Router();
 const path = require('path');
 const customerService = require(path.join(libPath, 'service', 'customer'));
 const hasRole = require(path.join(libPath, 'service', 'auth')).http().hasRole;
-const model = require(path.join(appRoot, 'model'));
 const ResDTO = require(path.join(appRoot, 'object', 'response-dto'));
 
 router.get('/', hasRole('STAFF'), function(req, res) {

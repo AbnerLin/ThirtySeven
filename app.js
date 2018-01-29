@@ -27,7 +27,7 @@ app.use(session({
     secret: '1234567890QWERT',
     resave: true,
     saveUninitialized: true
-}))
+}));
 
 /** Logger setting. */
 app.use(function(req, res, next) {

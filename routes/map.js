@@ -2,7 +2,6 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 const mapService = require(path.join(libPath, 'service', 'map'));
-const ResDTO = require(path.join(appRoot, 'object', 'response-dto'));
 
 router.get('/', function(req, res) {
     mapService.map.then(resDTO => {

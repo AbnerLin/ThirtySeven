@@ -1,8 +1,7 @@
 /**
  * Booking model.
  */
-
-var _export = function(sequelize, DataTypes) {
+var _export = (sequelize, DataTypes) => {
 
     const Booking = sequelize.define('booking', {
         /** Booking ID */
@@ -87,6 +86,6 @@ var _export = function(sequelize, DataTypes) {
     };
 
     return Booking;
-}
+};
 
 module.exports = _export;

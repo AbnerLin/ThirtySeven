@@ -1,7 +1,6 @@
 /**
  * SeatMap model.
  */
-
 var _export = function(sequelize, DataTypes) {
 
     const SeatMap = sequelize.define('seatmap', {
@@ -41,6 +40,6 @@ var _export = function(sequelize, DataTypes) {
     };
 
     return SeatMap;
-}
+};
 
 module.exports = _export;
