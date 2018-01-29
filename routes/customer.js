@@ -5,13 +5,13 @@ const customerService = require(path.join(libPath, 'service', 'customer'));
 const hasRole = require(path.join(libPath, 'service', 'auth')).http().hasRole;
 const ResDTO = require(path.join(appRoot, 'object', 'response-dto'));
 
-router.get('/', hasRole('STAFF'), function(req, res) {
+router.get('/', hasRole('STAFF'), (req, res) => {
     customerService.diningCustomer.then(resDTO => {
         res.send(resDTO);
     });
 });
 
-router.post('/', hasRole('STAFF'), function(req, res) {
+router.post('/', hasRole('STAFF'), (req, res) => {
     var name = req.body.name ? req.body.name : 'nobody';
     var phone = req.body.phone ? req.body.phone : '';
     var count = req.body.count;
@@ -23,7 +23,7 @@ router.post('/', hasRole('STAFF'), function(req, res) {
         return res.send(resDTO);
     }
 
-    if(!furnishId || furnishId == '') {
+    if (!furnishId || furnishId == '') {
         resDTO.statusFail('furnishId required.');
         return res.send(resDTO);
     }
@@ -39,11 +39,11 @@ router.post('/', hasRole('STAFF'), function(req, res) {
     });
 });
 
-router.put('/', hasRole('STAFF'), function(req, res) {
+router.put('/', hasRole('STAFF'), (req, res) => {
     var customerId = req.body.id;
 
     var resDTO = new ResDTO();
-    if(!customerId || customerId == '') {
+    if (!customerId || customerId == '') {
         resDTO.statusFail('customer\'s  id required.');
     }
 
