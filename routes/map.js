@@ -6,6 +6,7 @@ const hasRole = require(path.join(libPath, 'service', 'auth')).http().hasRole;
 const ResDTO = require(path.join(appRoot, 'object', 'response-dto'));
 const Ajv = require('ajv');
 const furnishArraySchema = require(path.join(appRoot, 'object', 'schema', 'furnish')).array;
+const furnishDeleteSchema = require(path.join(appRoot, 'object', 'schema', 'furnish')).delete;
 
 
 router.get('/', hasRole('STAFF'), (req, res) => {
@@ -72,23 +73,52 @@ router.get('/furnishClass', hasRole('STAFF'), (req, res) => {
 router.post('/:mapId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})/multi-furnish', hasRole('ADMIN'), (req, res) => {
     var mapId = req.params.mapId;
     var furnish = req.body.furnish;
+    var resDTO = new ResDTO();
+
+    try {
+        furnish = JSON.parse(furnish);
+    } catch (e) {
+        resDTO.statusFail(e.message);
+        return res.send(resDTO);
+    }
 
     var ajv = new Ajv();
     var validate = ajv.compile(furnishArraySchema);
-    var valid = validate(JSON.parse(furnish));
+    var valid = validate(furnish);
 
-    var resDTO = new ResDTO();
     if (!valid) {
         resDTO.statusFail(validate.errors);
         return res.send(resDTO);
     } else {
-        res.send(valid);
-        // TODO
+        mapService.newFurnish(mapId, furnish).then(resDTO => {
+            return res.send(resDTO);
+        });
     }
 });
 
-router.delete('/multi-funrish', hasRole('ADMIN'), (req, res) => {
+router.delete('/multi-furnish', hasRole('ADMIN'), (req, res) => {
+    var furnish = req.body.furnish;
+    var resDTO = new ResDTO();
 
+    try {
+        furnish = JSON.parse(furnish);
+    } catch (e) {
+        resDTO.statusFail(e.message);
+        return res.send(resDTO);
+    }
+
+    var ajv = new Ajv();
+    var validate = ajv.compile(furnishDeleteSchema);
+    var valid = validate(furnish);
+
+    if (!valid) {
+        resDTO.statusFail(validate.errors);
+        return res.send(resDTO);
+    } else {
+        mapService.deleteFurnish(furnish).then(resDTO => {
+            return res.send(resDTO);
+        });
+    }
 });
 
 module.exports = router;

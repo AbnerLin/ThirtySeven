@@ -14,7 +14,15 @@ var furnishArraySchema = {
     'items': furnishSchema
 };
 
+var deleteFurnishSchema = {
+    'type': 'array',
+    'items': [
+        { 'type': 'string', 'format': 'uuid' }
+    ]
+};
+
 module.exports = {
     single: furnishSchema,
-    array: furnishArraySchema
+    array: furnishArraySchema,
+    delete: deleteFurnishSchema
 };
