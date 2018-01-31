@@ -1,10 +1,13 @@
 const path = require('path');
-const menuService = require(path.join(__dirname, '..', 'lib', 'menu-service'));
 const express = require('express');
 const router = express.Router();
+const menuService = require(path.join(libPath, 'service', 'menu'));
+const hasRole = require(path.join(libPath, 'service', 'auth')).http().hasRole;
 
-router.get('/', function(req, res) {
-    res.send(menuService.menu);
+router.get('/', hasRole('STAFF'), (req, res) => {
+    menuService.menu.then(resDTO => {
+        return res.send(resDTO);
+    });
 });
 
 module.exports = router;
