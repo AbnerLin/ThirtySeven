@@ -11,7 +11,7 @@ const auth = require(path.join(appRoot, 'routes', 'auth'));
 const customer = require(path.join(appRoot, 'routes', 'customer'));
 const map = require(path.join(appRoot, 'routes', 'map'));
 const menu = require(path.join(appRoot, 'routes', 'menu'));
-//const order = require(path.join(process.cwd(), 'routes', 'order'));
+const order = require(path.join(appRoot, 'routes', 'order'));
 
 const app = express();
 app.use(bodyParser.json());
@@ -40,6 +40,6 @@ app.use('/api/auth', auth);
 app.use('/api/customer', customer);
 app.use('/api/map', map);
 app.use('/api/menu', menu);
-//app.use('/api/order', order);
+app.use('/api/order', order);
 
 module.exports = app;
