@@ -1,4 +1,4 @@
-var furnishSchema = {
+const furnishSchema = {
     'type': 'object',
     'properties': {
         'name': { 'type': 'string' },
@@ -9,12 +9,12 @@ var furnishSchema = {
     'required': ['name', 'x', 'y', 'furnishclass']
 };
 
-var furnishArraySchema = {
+const furnishArraySchema = {
     'type': 'array',
     'items': furnishSchema
 };
 
-var deleteFurnishSchema = {
+const deleteFurnishSchema = {
     'type': 'array',
     'items': [
         { 'type': 'string', 'format': 'uuid' }

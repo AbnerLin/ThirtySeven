@@ -1,4 +1,4 @@
-var orderSchema = {
+const orderSchema = {
     'type': 'object',
     'properties': {
         'volume': {
@@ -17,7 +17,7 @@ var orderSchema = {
     'required': ['volume', 'customerid', 'itemid']
 };
 
-var orderArraySchema = {
+const orderArraySchema = {
     'type': 'array',
     'items': orderSchema
 };
