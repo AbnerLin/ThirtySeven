@@ -46,32 +46,6 @@ router.post('/', hasRole('ADMIN'), (req, res) => {
             res.send(resDTO);
         });
     }
-
-    ////
-    // var name = req.body.name;
-    // var width = req.body.width;
-    // var height = req.body.height;
-
-    // var resDTO = new ResDTO();
-    // if (!name || name == '') {
-    //     resDTO.statusFail('name required.');
-    //     return res.send(resDTO);
-    // }
-
-    // var numberRex = new RegExp('[1-9]+');
-    // if (!width || !numberRex.test(width)) {
-    //     resDTO.statusFail('width(number, must great than 0) required.');
-    //     return res.send(resDTO);
-    // } else {
-    //     width = parseInt(width);
-    // }
-
-    // if (!height || !numberRex.test(height)) {
-    //     resDTO.statusFail('height(number, must great than 0) required.');
-    //     return res.send(resDTO);
-    // } else {
-    //     height = parseInt(height);
-    // }
 });
 
 router.delete('/:mapId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})', hasRole('ADMIN'), (req, res) => {
