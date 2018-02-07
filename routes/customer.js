@@ -4,7 +4,9 @@ const path = require('path');
 const customerService = require(path.join(libPath, 'service', 'customer'));
 const hasRole = require(path.join(libPath, 'service', 'auth')).http().hasRole;
 const ResDTO = require(path.join(appRoot, 'object', 'response-dto'));
+const customerCheckInSchema = require(path.join(appRoot, 'object', 'schema', 'customer')).single;
 
+const Ajv = require('ajv');
 router.get('/', hasRole('STAFF'), (req, res) => {
     customerService.diningCustomer.then(resDTO => {
         res.send(resDTO);
@@ -12,28 +14,23 @@ router.get('/', hasRole('STAFF'), (req, res) => {
 });
 
 router.post('/', hasRole('STAFF'), (req, res) => {
-    var name = req.body.name ? req.body.name : 'nobody';
-    var phone = req.body.phone ? req.body.phone : '';
-    var count = req.body.count;
-    var furnishId = req.body.furnishId;
-
+    var customer = req.body.customer;
     var resDTO = new ResDTO();
-    if (!count || count <= 0) {
-        resDTO.statusFail('customer count incorrect.');
+
+    try {
+        customer = JSON.parse(customer);
+    } catch (e) {
+        resDTO.statusFail(e.message);
         return res.send(resDTO);
     }
 
-    if (!furnishId || furnishId == '') {
-        resDTO.statusFail('furnishId required.');
-        return res.send(resDTO);
-    }
+    customer.name = customer.name ? customer.name : 'nobody';
 
-    customerService.checkIn({
-        name: name,
-        phone: phone,
-        count: count,
-        furnishId: furnishId
-    }).then(resDTO => {
+    var ajv = new Ajv();
+    var validate = ajv.compile(customerCheckInSchema);
+    var valid = validate(customer);
+
+    customerService.checkIn(customer).then(resDTO => {
         //TODO websocket broadcast !!
         res.send(resDTO);
     });
@@ -45,6 +42,7 @@ router.put('/', hasRole('STAFF'), (req, res) => {
     var resDTO = new ResDTO();
     if (!customerId || customerId == '') {
         resDTO.statusFail('customer\'s  id required.');
+        return res.send(resDTO);
     }
 
     customerService.checkOut(customerId).then(resDTO => {
