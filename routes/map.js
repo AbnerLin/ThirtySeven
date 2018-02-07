@@ -7,6 +7,7 @@ const ResDTO = require(path.join(appRoot, 'object', 'response-dto'));
 const Ajv = require('ajv');
 const furnishArraySchema = require(path.join(appRoot, 'object', 'schema', 'furnish')).array;
 const furnishDeleteSchema = require(path.join(appRoot, 'object', 'schema', 'furnish')).delete;
+const mapSchema = require(path.join(appRoot, 'object', 'schema', 'map')).single;
 
 
 router.get('/', hasRole('STAFF'), (req, res) => {
@@ -23,38 +24,54 @@ router.get('/:mapId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A
 });
 
 router.post('/', hasRole('ADMIN'), (req, res) => {
-    var name = req.body.name;
-    var width = req.body.width;
-    var height = req.body.height;
-
+    var map = req.body.map;
     var resDTO = new ResDTO();
-    if (!name || name == '') {
-        resDTO.statusFail('name required.');
+
+    try {
+        map = JSON.parse(map);
+    } catch (e) {
+        resDTO.statusFail(e.message);
         return res.send(resDTO);
     }
 
-    var numberRex = new RegExp('[1-9]+');
-    if (!width || !numberRex.test(width)) {
-        resDTO.statusFail('width(number, must great than 0) required.');
+    var ajv = new Ajv();
+    var validate = ajv.compile(mapSchema);
+    var valid = validate(map);
+
+    if (!valid) {
+        resDTO.statusFail(validate.errors);
         return res.send(resDTO);
     } else {
-        width = parseInt(width);
+        mapService.newMap(map).then(resDTO => {
+            res.send(resDTO);
+        });
     }
 
-    if (!height || !numberRex.test(height)) {
-        resDTO.statusFail('height(number, must great than 0) required.');
-        return res.send(resDTO);
-    } else {
-        height = parseInt(height);
-    }
+    ////
+    // var name = req.body.name;
+    // var width = req.body.width;
+    // var height = req.body.height;
 
-    mapService.newMap({
-        name: name,
-        width: width,
-        height: height
-    }).then(resDTO => {
-        res.send(resDTO);
-    });
+    // var resDTO = new ResDTO();
+    // if (!name || name == '') {
+    //     resDTO.statusFail('name required.');
+    //     return res.send(resDTO);
+    // }
+
+    // var numberRex = new RegExp('[1-9]+');
+    // if (!width || !numberRex.test(width)) {
+    //     resDTO.statusFail('width(number, must great than 0) required.');
+    //     return res.send(resDTO);
+    // } else {
+    //     width = parseInt(width);
+    // }
+
+    // if (!height || !numberRex.test(height)) {
+    //     resDTO.statusFail('height(number, must great than 0) required.');
+    //     return res.send(resDTO);
+    // } else {
+    //     height = parseInt(height);
+    // }
 });
 
 router.delete('/:mapId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})', hasRole('ADMIN'), (req, res) => {

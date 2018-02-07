@@ -12,7 +12,7 @@ router.get('/:customerId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-
     var customerId = req.params.customerId;
 
     orderService.getOrderById(customerId).then(resDTO => {
-        res.send(resDTO); 
+        res.send(resDTO);
     });
 });
 
@@ -31,17 +31,22 @@ router.post('/', hasRole('STAFF'), (req, res) => {
     var validate = ajv.compile(orderSchema);
     var valid = validate(order);
 
-    orderService.newOrder(order).then(resDTO => {
-        //TODO websocket broadcast.
-        res.send(resDTO);
-    });
+    if (!valid) {
+        resDTO.statusFail(validate.errors);
+        return res.send(resDTO);
+    } else {
+        orderService.newOrder(order).then(resDTO => {
+            //TODO websocket broadcast.
+            res.send(resDTO);
+        });
+    }
 });
 
 router.put('/', (req, res) => {
     var orderId = req.body.orderId;
 
     var resDTO = new ResDTO();
-    if(!orderId || orderId == '') {
+    if (!orderId || orderId == '') {
         resDTO.statusFail('order\'s id required.');
         return res.send(resDTO);
     }

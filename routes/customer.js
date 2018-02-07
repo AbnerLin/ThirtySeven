@@ -7,6 +7,7 @@ const ResDTO = require(path.join(appRoot, 'object', 'response-dto'));
 const customerCheckInSchema = require(path.join(appRoot, 'object', 'schema', 'customer')).single;
 
 const Ajv = require('ajv');
+
 router.get('/', hasRole('STAFF'), (req, res) => {
     customerService.diningCustomer.then(resDTO => {
         res.send(resDTO);
@@ -30,10 +31,15 @@ router.post('/', hasRole('STAFF'), (req, res) => {
     var validate = ajv.compile(customerCheckInSchema);
     var valid = validate(customer);
 
-    customerService.checkIn(customer).then(resDTO => {
-        //TODO websocket broadcast !!
-        res.send(resDTO);
-    });
+    if (!valid) {
+        resDTO.statusFail(validate.errors);
+        return res.send(resDTO);
+    } else {
+        customerService.checkIn(customer).then(resDTO => {
+            //TODO websocket broadcast !!
+            res.send(resDTO);
+        });
+    }
 });
 
 router.put('/', hasRole('STAFF'), (req, res) => {
