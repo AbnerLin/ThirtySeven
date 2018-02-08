@@ -5,4 +5,5 @@ The ThritySeven is the application same with [ThirtySix](https://github.com/Abne
     We will use the Node.js(v8.x.x) for RESTful API, and use Sequelize to access database.
 
 ## Front-end
-    We will use the Angular to develop front-end.
+    We will develop two version of front-end, one is using the Angular([ThirtySeven-Angular-Smile](https://github.com/AbnerLin/ThirtySeven-Angular-Smile)), and second is using React([ThirtySeven-React-Smile](https://github.com/AbnerLin/ThirtySeven-React-Smile)).
+
