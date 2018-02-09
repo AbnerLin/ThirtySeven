@@ -1,8 +1,16 @@
 const path = require('path');
 const authService = require(path.join(appRoot, 'lib', 'service', 'auth')).http();
+const hasRole = authService.hasRole;
 const ResDTO = require(path.join(appRoot, 'object', 'response-dto'));
 const express = require('express');
 const router = express.Router();
+
+router.get('/', hasRole('STAFF'), (req, res) => {
+    /** check authentication */
+    var resDTO = new ResDTO();
+    resDTO.statusOK();
+    res.send(resDTO);
+});
 
 router.post('/login', (req, res) => {
     var username = req.body.username;
