@@ -1,0 +1,19 @@
+{
+    "OK": {
+        "K0200": {
+            "code": "0200",
+            "Msg": "Everything is working fine."
+        }
+    },
+    "AUTH":
+    {
+        "E0040": {
+            "code": "0040",
+            "Msg": "Authentication is required."
+        },
+        "E0050": {
+            "code": "0050",
+            "Msg": "Permission denied."
+        }
+    }
+}

@@ -17,7 +17,7 @@ router.post('/login', (req, res) => {
 router.get('/logout', authService.logout(), (req, res) => {
     var resDTO = new ResDTO();
     resDTO.statusFail('logout failed.');
-    if(!req.session) {
+    if (!req.session) {
         resDTO.statusOK('logout success.');
     }
     return res.send(resDTO);
