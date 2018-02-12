@@ -3,7 +3,7 @@ const statusCode = require(path.join(appRoot, 'status-code.json'));
 
 class ResponseDTO {
     constructor() {
-        this._code = null;
+        this._code = statusCode.OK.K0200.code;
         this._status = false;
         this._msg = null;
         this._data = null;
@@ -12,7 +12,6 @@ class ResponseDTO {
     statusOK(msg = statusCode.OK.K0200.Msg) {
         this._msg = msg;
         this._status = true;
-        this._code = statusCode.OK.K0200.code;
     }
 
     statusFail(msg) {
