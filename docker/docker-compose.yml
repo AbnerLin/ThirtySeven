@@ -1,0 +1,14 @@
+version: '3'
+services:
+    thirtyseven-db:
+        container_name: thirtyseven-db
+        build:
+            context: ../
+            dockerfile: docker/PostgreSQL-9.6/Dockerfile
+        image: postgres:thirtyseven-db
+        environment:
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_DB=thirtyseven
+        ports:
+            - 5432:5432
