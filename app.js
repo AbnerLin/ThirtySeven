@@ -19,7 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 /** CORS */
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+    var allowedOrigins = ['http://localhost:3001', 'http://192.168.9.180:3001'];
+    var origin = req.headers.origin;
+    if(allowedOrigins.indexOf(origin) > -1){
+       res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
