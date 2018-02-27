@@ -6,29 +6,29 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', hasRole('STAFF'), (req, res) => {
-    /** check authentication */
-    var resDTO = new ResDTO();
-    resDTO.statusOK();
-    res.send(resDTO);
+  /** check authentication */
+  var resDTO = new ResDTO();
+  resDTO.statusOK();
+  res.send(resDTO);
 });
 
 router.post('/login', (req, res) => {
-    var username = req.body.username;
-    var password = req.body.password;
+  var username = req.body.username;
+  var password = req.body.password;
 
-    authService.login(username, password).then(resDTO => {
-        req.session.userInfo = resDTO.data;
-        return res.send(resDTO);
-    });
+  authService.login(username, password).then(resDTO => {
+    req.session.userInfo = resDTO.data;
+    return res.send(resDTO);
+  });
 });
 
 router.get('/logout', authService.logout(), (req, res) => {
-    var resDTO = new ResDTO();
-    resDTO.statusFail('logout failed.');
-    if (!req.session) {
-        resDTO.statusOK('logout success.');
-    }
-    return res.send(resDTO);
+  var resDTO = new ResDTO();
+  resDTO.statusFail('logout failed.');
+  if (!req.session) {
+    resDTO.statusOK('logout success.');
+  }
+  return res.send(resDTO);
 });
 
 module.exports = router;

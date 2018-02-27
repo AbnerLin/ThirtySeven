@@ -129,7 +129,6 @@ router.put('/furnish/:furnishId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A
       return res.send(resDTO);
     });
   }
-
 });
 
 module.exports = router;

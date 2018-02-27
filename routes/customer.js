@@ -9,51 +9,51 @@ const customerCheckInSchema = require(path.join(appRoot, 'object', 'schema', 'cu
 const Ajv = require('ajv');
 
 router.get('/', hasRole('STAFF'), (req, res) => {
-    customerService.diningCustomer.then(resDTO => {
-        res.send(resDTO);
-    });
+  customerService.diningCustomer.then(resDTO => {
+    res.send(resDTO);
+  });
 });
 
 router.post('/', hasRole('STAFF'), (req, res) => {
-    var customer = req.body.customer;
-    var resDTO = new ResDTO();
+  var customer = req.body.customer;
+  var resDTO = new ResDTO();
 
-    try {
-        customer = JSON.parse(customer);
-    } catch (e) {
-        resDTO.statusFail(e.message);
-        return res.send(resDTO);
-    }
+  try {
+    customer = JSON.parse(customer);
+  } catch (e) {
+    resDTO.statusFail(e.message);
+    return res.send(resDTO);
+  }
 
-    customer.name = customer.name ? customer.name : 'nobody';
+  customer.name = customer.name ? customer.name : 'nobody';
 
-    var ajv = new Ajv();
-    var validate = ajv.compile(customerCheckInSchema);
-    var valid = validate(customer);
+  var ajv = new Ajv();
+  var validate = ajv.compile(customerCheckInSchema);
+  var valid = validate(customer);
 
-    if (!valid) {
-        resDTO.statusFail(validate.errors);
-        return res.send(resDTO);
-    } else {
-        customerService.checkIn(customer).then(resDTO => {
-            //TODO websocket broadcast !!
-            res.send(resDTO);
-        });
-    }
+  if (!valid) {
+    resDTO.statusFail(validate.errors);
+    return res.send(resDTO);
+  } else {
+    customerService.checkIn(customer).then(resDTO => {
+      //TODO websocket broadcast !!
+      res.send(resDTO);
+    });
+  }
 });
 
 router.put('/', hasRole('STAFF'), (req, res) => {
-    var customerId = req.body.id;
+  var customerId = req.body.id;
 
-    var resDTO = new ResDTO();
-    if (!customerId || customerId == '') {
-        resDTO.statusFail('customer\'s  id required.');
-        return res.send(resDTO);
-    }
+  var resDTO = new ResDTO();
+  if (!customerId || customerId == '') {
+    resDTO.statusFail('customer\'s  id required.');
+    return res.send(resDTO);
+  }
 
-    customerService.checkOut(customerId).then(resDTO => {
-        res.send(resDTO);
-    });
+  customerService.checkOut(customerId).then(resDTO => {
+    res.send(resDTO);
+  });
 });
 
 module.exports = router;

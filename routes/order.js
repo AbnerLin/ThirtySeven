@@ -9,52 +9,52 @@ const orderSchema = require(path.join(appRoot, 'object', 'schema', 'order')).sin
 const Ajv = require('ajv');
 
 router.get('/:customerId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})', hasRole('STAFF'), (req, res) => {
-    var customerId = req.params.customerId;
+  var customerId = req.params.customerId;
 
-    orderService.getOrderById(customerId).then(resDTO => {
-        res.send(resDTO);
-    });
+  orderService.getOrderById(customerId).then(resDTO => {
+    res.send(resDTO);
+  });
 });
 
 router.post('/', hasRole('STAFF'), (req, res) => {
-    var order = req.body.order;
-    var resDTO = new ResDTO();
+  var order = req.body.order;
+  var resDTO = new ResDTO();
 
-    try {
-        order = JSON.parse(order);
-    } catch (e) {
-        resDTO.statusFail(e.message);
-        return res.send(resDTO);
-    }
+  try {
+    order = JSON.parse(order);
+  } catch (e) {
+    resDTO.statusFail(e.message);
+    return res.send(resDTO);
+  }
 
-    var ajv = new Ajv();
-    var validate = ajv.compile(orderSchema);
-    var valid = validate(order);
+  var ajv = new Ajv();
+  var validate = ajv.compile(orderSchema);
+  var valid = validate(order);
 
-    if (!valid) {
-        resDTO.statusFail(validate.errors);
-        return res.send(resDTO);
-    } else {
-        orderService.newOrder(order).then(resDTO => {
-            //TODO websocket broadcast.
-            res.send(resDTO);
-        });
-    }
+  if (!valid) {
+    resDTO.statusFail(validate.errors);
+    return res.send(resDTO);
+  } else {
+    orderService.newOrder(order).then(resDTO => {
+      //TODO websocket broadcast.
+      res.send(resDTO);
+    });
+  }
 });
 
 router.put('/', (req, res) => {
-    var orderId = req.body.orderId;
+  var orderId = req.body.orderId;
 
-    var resDTO = new ResDTO();
-    if (!orderId || orderId == '') {
-        resDTO.statusFail('order\'s id required.');
-        return res.send(resDTO);
-    }
+  var resDTO = new ResDTO();
+  if (!orderId || orderId == '') {
+    resDTO.statusFail('order\'s id required.');
+    return res.send(resDTO);
+  }
 
-    orderService.sendMeal(orderId).then(resDTO => {
-        //TODO websocket broadcast.
-        res.send(resDTO);
-    });
+  orderService.sendMeal(orderId).then(resDTO => {
+    //TODO websocket broadcast.
+    res.send(resDTO);
+  });
 });
 
 module.exports = router;
