@@ -13,7 +13,7 @@ var server = null;
 /** Database */
 var models = require(path.join(__dirname, '..', 'model'));
 models.sequelize.sync({
-    force: false,
+    force: false, // if set true, Model will run DROP IF EXISTS.
     alter: false
 }).then(function() {
 

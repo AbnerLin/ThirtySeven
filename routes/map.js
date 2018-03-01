@@ -2,13 +2,16 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 const mapService = require(path.join(libPath, 'service', 'map'));
+const customerService = require(path.join(libPath, 'service', 'customer'));
 const hasRole = require(path.join(libPath, 'service', 'auth')).http().hasRole;
 const ResDTO = require(path.join(appRoot, 'object', 'response-dto'));
-const Ajv = require('ajv');
 const furnishPostArraySchema = require(path.join(appRoot, 'object', 'schema', 'furnish')).postArray;
 const furnishDeleteArraySchema = require(path.join(appRoot, 'object', 'schema', 'furnish')).deleteArray;
 const furnishUpdateSingleSchema = require(path.join(appRoot, 'object', 'schema', 'furnish')).updateSingle;
 const mapSchema = require(path.join(appRoot, 'object', 'schema', 'map')).single;
+const Ajv = require('ajv');
+const _ = require('lodash');
+
 
 router.get('/', hasRole('STAFF'), (req, res) => {
   mapService.map.then(resDTO => {
@@ -125,10 +128,32 @@ router.put('/furnish/:furnishId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A
     resDTO.statusFail(validate.errors);
     return res.send(resDTO);
   } else {
-    mapService.updateFurnish(furnishId, furnish).then(resDTO => {
+    mapService.updateFurnishById(furnishId, furnish).then(resDTO => {
       return res.send(resDTO);
     });
   }
+});
+
+router.delete('/furnish/:furnishId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})', async(req, res) => {
+  //TODO hasRole.
+  var furnishId = req.params.furnishId;
+  var resDTO = new ResDTO();
+
+  var isFurnishInUse = await customerService.diningCustomer.then(resDTO => {
+    var target = _.find(resDTO.data, data => {
+      return data.furnish == furnishId;
+    });
+    return target ? true : false;
+  });
+
+  if (isFurnishInUse) {
+    resDTO.statusFail('furnish in use.');
+    return res.send(resDTO);
+  }
+
+  mapService.deleteFurnishById(furnishId).then(resDTO => {
+    return res.send(resDTO);
+  });
 });
 
 module.exports = router;

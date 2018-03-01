@@ -42,7 +42,7 @@ var _export = function(sequelize, DataTypes) {
     /** Table number */
     furnish: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         isUUID: 4
       },
@@ -63,7 +63,8 @@ var _export = function(sequelize, DataTypes) {
       as: 'furnishObj',
       foreignKey: 'furnish',
       /** Target model column */
-      targetKey: 'furnishid'
+      targetKey: 'furnishid',
+      onDelete: 'SET NULL'
     });
 
     Customer.hasMany(model.booking, {
