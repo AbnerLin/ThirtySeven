@@ -134,8 +134,7 @@ router.put('/furnish/:furnishId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A
   }
 });
 
-router.delete('/furnish/:furnishId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})', async(req, res) => {
-  //TODO hasRole.
+router.delete('/furnish/:furnishId([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})', hasRole('ADMIN'), async(req, res) => {
   var furnishId = req.params.furnishId;
   var resDTO = new ResDTO();
 
