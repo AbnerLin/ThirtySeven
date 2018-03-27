@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/', hasRole('STAFF'), (req, res) => {
   /** check authentication */
   var resDTO = new ResDTO();
+  resDTO.data = req.session.userInfo;
   resDTO.statusOK();
   res.send(resDTO);
 });
