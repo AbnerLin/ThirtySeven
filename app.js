@@ -44,7 +44,7 @@ app.use(session({
 
 /** Logger setting. */
 app.use(function(req, res, next) {
-    logger.info(logger.requestPattern(req));
+    logger.info(logger.getRequestPattern(req));
     next();
 });
 
