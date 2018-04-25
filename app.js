@@ -1,4 +1,5 @@
 const path = require('path');
+const util = require('util');
 global.appRoot = path.resolve(__dirname);
 global.libPath = path.resolve(appRoot + '/lib');
 
@@ -30,7 +31,7 @@ app.use((req, res, next) => {
     next();
 });
 
-/** Session */
+/** Session, (using memory storage, not persisting in production. refs https://www.npmjs.com/package/connect-session-sequelize) */
 app.use(session({
     cookie: {
         path: '/',
@@ -44,7 +45,7 @@ app.use(session({
 
 /** Logger setting. */
 app.use(function(req, res, next) {
-    logger.info(logger.getRequestPattern(req));
+    logger.info(loggerPattern.request(req));
     next();
 });
 
@@ -56,3 +57,39 @@ app.use('/api/menu', menu);
 app.use('/api/order', order);
 
 module.exports = app;
+
+
+/** logger pattern(for http) */
+var loggerPattern = (() => {
+    var _export = {};
+
+    /** request pattern */
+    _export.request = req => {
+      return util.format('%s %s From: %s\nparams: %s',
+        req.method,
+        req.path,
+        req.ip,
+        (function() {
+          if (req.path != '/auth/login') {
+            if (req.method == 'GET') {
+              return JSON.stringify(req.params);
+            } else {
+              return JSON.stringify(req.body);
+            }
+          } else {
+            return '**password**';
+          }
+        })()
+      ); 
+    }
+
+    /** response pattern */
+    _export.response = res => {
+      return util.format('%s %s',
+        res.statusCode,
+        res.locals.message
+      );
+    }
+
+    return _export;
+})();
