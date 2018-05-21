@@ -45,7 +45,7 @@ CREATE TYPE public.enum_furnishclass_name AS ENUM (
 );
 
 
-ALTER TYPE public.enum_furnishclass_name OWNER TO admin36;
+ALTER TYPE public.enum_furnishclass_name OWNER TO admin;
 
 SET default_tablespace = '';
 
@@ -66,7 +66,7 @@ CREATE TABLE public.booking (
 );
 
 
-ALTER TABLE public.booking OWNER TO admin36;
+ALTER TABLE public.booking OWNER TO postgres;
 
 --
 -- Name: customer; Type: TABLE; Schema: public; Owner: postgres
@@ -84,7 +84,7 @@ CREATE TABLE public.customer (
 );
 
 
-ALTER TABLE public.customer OWNER TO admin36;
+ALTER TABLE public.customer OWNER TO postgres;
 
 --
 -- Name: furnish; Type: TABLE; Schema: public; Owner: postgres
@@ -100,7 +100,7 @@ CREATE TABLE public.furnish (
 );
 
 
-ALTER TABLE public.furnish OWNER TO admin36;
+ALTER TABLE public.furnish OWNER TO postgres;
 
 --
 -- Name: furnishclass; Type: TABLE; Schema: public; Owner: postgres
@@ -115,7 +115,7 @@ CREATE TABLE public.furnishclass (
 );
 
 
-ALTER TABLE public.furnishclass OWNER TO admin36;
+ALTER TABLE public.furnishclass OWNER TO postgres;
 
 --
 -- Name: item; Type: TABLE; Schema: public; Owner: postgres
@@ -132,7 +132,7 @@ CREATE TABLE public.item (
 );
 
 
-ALTER TABLE public.item OWNER TO admin36;
+ALTER TABLE public.item OWNER TO postgres;
 
 --
 -- Name: itemclass; Type: TABLE; Schema: public; Owner: postgres
@@ -147,7 +147,7 @@ CREATE TABLE public.itemclass (
 );
 
 
-ALTER TABLE public.itemclass OWNER TO admin36;
+ALTER TABLE public.itemclass OWNER TO postgres;
 
 --
 -- Name: seatmap; Type: TABLE; Schema: public; Owner: postgres
@@ -161,7 +161,7 @@ CREATE TABLE public.seatmap (
 );
 
 
-ALTER TABLE public.seatmap OWNER TO admin36;
+ALTER TABLE public.seatmap OWNER TO postgres;
 
 --
 -- Name: userinfo; Type: TABLE; Schema: public; Owner: postgres
@@ -173,7 +173,7 @@ CREATE TABLE public.userinfo (
 );
 
 
-ALTER TABLE public.userinfo OWNER TO admin36;
+ALTER TABLE public.userinfo OWNER TO postgres;
 
 --
 -- Name: userrole; Type: TABLE; Schema: public; Owner: postgres
@@ -185,7 +185,7 @@ CREATE TABLE public.userrole (
 );
 
 
-ALTER TABLE public.userrole OWNER TO admin36;
+ALTER TABLE public.userrole OWNER TO postgres;
 
 --
 -- Data for Name: booking; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -214,11 +214,10 @@ be88b22b-7ae7-410a-87b1-e2ad76e27793	2017-07-28 15:08:52+00	2018-01-26 09:30:39.
 --
 
 COPY public.furnish (furnishid, name, x, y, furnishclass, mapid) FROM stdin;
+0402028d-04f6-4bab-a0f7-20b626dffa88	A2	212	129	48a7d493-dc80-4318-b180-ed51f16f120c	4cd7c00c-cf6e-4cdc-afbb-c3b1c8b013b3
+08e9fc0d-e966-442a-9992-3c288aa55c8a	A4	216	232	48a7d493-dc80-4318-b180-ed51f16f120c	4cd7c00c-cf6e-4cdc-afbb-c3b1c8b013b3
 c30e52a0-639c-4e41-9b60-d10e8bd4f5fd	A3	27	236	48a7d493-dc80-4318-b180-ed51f16f120c	4cd7c00c-cf6e-4cdc-afbb-c3b1c8b013b3
-08e9fc0d-e966-442a-9992-3c288aa55c8a	A4	260	226	48a7d493-dc80-4318-b180-ed51f16f120c	4cd7c00c-cf6e-4cdc-afbb-c3b1c8b013b3
-0402028d-04f6-4bab-a0f7-20b626dffa88	A2	347	228	48a7d493-dc80-4318-b180-ed51f16f120c	4cd7c00c-cf6e-4cdc-afbb-c3b1c8b013b3
-8b30fb75-d73e-4af5-bf72-99d5662d5f2b	A1	367	54	48a7d493-dc80-4318-b180-ed51f16f120c	4cd7c00c-cf6e-4cdc-afbb-c3b1c8b013b3
-7abe8178-b781-43a9-9175-354b5f5721c7		154	164	f8888e43-fe4b-4751-a1cd-3e9110a074a2	4cd7c00c-cf6e-4cdc-afbb-c3b1c8b013b3
+8b30fb75-d73e-4af5-bf72-99d5662d5f2b	A1	27	130	48a7d493-dc80-4318-b180-ed51f16f120c	4cd7c00c-cf6e-4cdc-afbb-c3b1c8b013b3
 \.
 
 

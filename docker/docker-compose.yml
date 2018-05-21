@@ -6,9 +6,33 @@ services:
             context: ../
             dockerfile: docker/PostgreSQL-9.6/Dockerfile
         image: postgres:thirtyseven-db
+        networks:
+            - internal
         environment:
             - POSTGRES_USER=admin
             - POSTGRES_PASSWORD=admin
             - POSTGRES_DB=thirtyseven
+#           - PGDATA= ??
+#        ports:
+#            - 5432:5432
+    thirtyseven-api:
+        container_name: thirtyseven-api
+        build:
+            context: ../
+            dockerfile: docker/Node9.11.1/Dockerfile
+        image: node:thirtyseven-api
+        user: "node"
+        depends_on:
+            - thirtyseven-db
+#        environment:
+#            - NODE_ENV=production
+        working_dir: /ThirtySeven
+        volumes:
+            - ../:/ThirtySeven
         ports:
-            - 5432:5432
+            - 3000:3000
+        networks:
+            - internal
+        command: "npm start"
+networks:
+    internal:

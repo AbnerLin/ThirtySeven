@@ -1,7 +1,7 @@
 {
     "DB":
     {
-        "HOST": "localhost",
+        "HOST": "thirtyseven-db",
         "PORT": "5432",
         "DATABASE": "thirtyseven",
         "USERNAME": "admin36",
