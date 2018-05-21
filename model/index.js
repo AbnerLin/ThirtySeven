@@ -6,6 +6,7 @@ const config = require(path.join(__dirname, '..', 'config.json'));
 
 /** Establish connection. */
 const sequelize = new Sequelize(config.DB.DATABASE, config.DB.USERNAME, config.DB.PASSWORD, {
+  operatorsAliases: false,
   host: config.DB.HOST,
   dialect: 'postgres',
   logging: function(msg) {
