@@ -16,6 +16,21 @@ const sequelize = new Sequelize(config.DB.DATABASE, config.DB.USERNAME, config.D
     max: 3,
     min: 0,
     idle: 10000
+  },
+  retry: {
+    match: [
+      /SequelizeConnectionError/,
+      /SequelizeConnectionRefusedError/,
+      /SequelizeHostNotFoundError/,
+      /SequelizeHostNotReachableError/,
+      /SequelizeInvalidConnectionError/,
+      /SequelizeConnectionTimedOutError/
+    ],
+    name: 'query',
+    backoffBase: 100,
+    backoffExponent: 1.1,
+    timeout: 60000,
+    max: Infinity
   }
 });
 
